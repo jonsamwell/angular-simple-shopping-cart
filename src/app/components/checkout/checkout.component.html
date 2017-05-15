@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="medium-4 columns">
+    <h2>
+      <i class="material-icons">shopping_basket</i>
+      <span>Checkout</span>
+    </h2>
+  </div>
+  <div class="medium-4 columns text-right">
+    <h4>
+      Order Total
+      <span class="text--red text--bold js-gross-total">{{(cart | async).grossTotal | currency:'GBP':true}}</span>
+    </h4>
+  </div>
+  <div class="medium-4 columns text-right">
+    <h5 class="text--red"
+       *ngIf="(cart | async).deliveryOptionId === undefined">Please select a delivery option...</h5>
+    <a class="success button large"
+       *ngIf="(cart | async).deliveryOptionId !== undefined"
+       routerLink="/confirmed">Purchase Order</a>
+  </div>
+  <hr/>
+</div>
+<div class="row">
+  <div class="medium-8 columns">
+    <h4>Delivery 1 of 1</h4>
+    <small>Dispatching to the UK....</small>
+    <div class="row checkout_row"
+        *ngFor="let item of cartItems">
+      <div class="medium-2 columns text-center">
+          <img src="./assets/{{item.product.id}}.jpg"
+                class="product_image"/>
+      </div>
+      <div class="medium-5 columns">
+          <span class="text--bold js-product-name">{{item.product.name}}</span>
+          <p class="js-product-desc">{{item.product.description}}</p>
+      </div>
+      <div class="medium-2 columns text-right">
+          <p class="text--red js-product-costs">{{item.quantity}} x {{item.product.price | currency:'GBP':true}}</p>
+      </div>
+      <div class="medium-3 columns text-right">
+          <p class="text--bold text--red js-product-total">{{item.totalCost | currency:'GBP':true}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="medium-4 columns">
+    <h4>Delivery Options</h4>
+
+    <div class="row delivery-option"
+        *ngFor="let option of deliveryOptions | async">
+        <div class="small-1 columns">
+          <input type="radio"
+                 name="delivery_option"
+                 id="{{option.name}}"
+                 [checked]="option.id === (cart | async).deliveryOptionId"
+                 (click)="setDeliveryOption(option)">
+        </div>
+        <div class="small-9 columns">
+          <label class="text--bold js-option-name" for="{{option.name}}" (click)="setDeliveryOption(option)">{{option.name}}</label>
+        </div>
+        <div class="small-2 columns">
+          <p class="text--bold text--red js-option-price">{{option.price | currency:'GBP':true}}</p>
+        </div>
+        <div class="small-12 columns">
+          <p>{{option.description}}</p>
+        </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="small-10 columns small-centered">
+      <a class="warning button expanded"
+        routerLink="/">Continue Shopping</a>
+    </div>
+  </div>
+</div>

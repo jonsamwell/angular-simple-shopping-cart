@@ -1,0 +1,24 @@
+.product-list {
+  list-style-type: none;
+  margin: 0;
+}
+
+.product-container {
+    padding: 2rem 3rem 0 0;
+    position: relative;
+    border: 1px solid #EFEFEF;
+    margin: 10px 0;
+
+  &:hover {
+    box-shadow: 0 0 5px rgba(50,50,50,0.3);
+  }
+
+  .product_image {
+    max-height: 250px;
+  }
+
+  .product_price {
+    float: right;
+    margin-top: 1rem;
+  }
+}

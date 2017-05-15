@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="small-12 columns">
+    <h3>
+      <i class="material-icons">shopping_basket</i>
+      Your Shopping Basket
+    </h3>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="small-12 columns">
+    <h5>
+      Sub Total ({{itemCount}} items):
+      <span class="text--red text--bold js-cart-total">{{(cart | async).grossTotal | currency:'GBP':true}}</span>
+    </h5>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="small-12 columns">
+    <a class="success button large expanded"
+       [attr.disabled]="itemCount === 0 ? true : null"
+       routerLink="/checkout">Proceed To Checkout</a>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns text-center">
+    or
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 columns">
+    <button type="button"
+            class="secondary button small expanded js-btn-empty-cart"
+            (click)="emptyCart()"
+            [attr.disabled]="itemCount === 0 ? true : null">
+      Empty shopping basket
+    </button>
+  </div>
+</div>

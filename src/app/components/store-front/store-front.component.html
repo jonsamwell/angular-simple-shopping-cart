@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="small-12 medium-8 columns">
+    <h3>Pick your favourite juices...</h3>
+    <ul class="product-list">
+      <li *ngFor="let product of products | async"
+          class="product-container">
+          <div class="row">
+            <div class="medium-3 columns text-center">
+              <img src="./assets/{{product.id}}.jpg"
+                   class="product_image"/>
+            </div>
+            <div class="medium-9 columns">
+              <h4>
+                <span class="text--bold js-product-name">{{product.name}}</span>
+                <small class="product_price js-product-price">{{product.price | currency:'GBP':true}}</small>
+              </h4>
+              <p class="js-product-desc">{{product.description}}</p>
+              <p>
+                <span class="text--bold">ingredients:</span>
+                <br/>
+                <span *ngFor="let ingredient of product.ingredients ">
+                  {{ingredient.name}} ({{ingredient.percentage}}%)
+                  <br/>
+                </span>
+              </p>
+              <p>
+                <button type="button"
+                        class="button success large js-btn-add"
+                        (click)="addProductToCart(product, 1)">Add To Cart</button>
+                <button type="button"
+                        class="button small js-btn-remove"
+                        *ngIf="productInCart(product) | async"
+                        (click)="removeProductFromCart(product, 1)">Remove item from cart</button>
+              </p>
+            </div>
+          </div>
+      </li>
+    </ul>
+  </div>
+  <div class="small-12 medium-4 columns">
+    <app-shopping-cart></app-shopping-cart>
+  </div>
+</div>
